@@ -1,0 +1,27 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  config:
+    import: configserver:http://localhost:8888/
+  application:
+    name: gateway
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: user
+          uri: lb://user
+          predicates:
+            - Path=/user/**
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://${EUREKA_SERVER}:8761/eureka
