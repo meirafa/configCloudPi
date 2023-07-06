@@ -1,11 +1,15 @@
 server:
   port: 0
+  servlet:
+    context-path: /user/
 
 spring:
-  config:
-    import: optional:configserver:http://config:8888/
   application:
     name: user
+  config:
+    activate:
+      on-profile: "production"
+    import: optional:configserver:http://config:8888/
 
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
