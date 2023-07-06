@@ -1,11 +1,16 @@
 server:
   port: ${PORT:8080}
+  servlet:
+    context-path: /gateway/
 
 spring:
-  config:
-    import: configserver:http://localhost:8888/
   application:
     name: gateway
+
+  config:
+    activate:
+      on-profile: "production"
+    import: configserver:http://localhost:8888/
 
   cloud:
     gateway:
@@ -18,8 +23,14 @@ spring:
           uri: lb://user
           predicates:
             - Path=/user/**
+        - id: account
+          uri: lb://account
+          predicates:
+            - Path=/account/**
 
 eureka:
+  instance:
+    hostname: ${EUREKA_SERVER}
   client:
     registerWithEureka: true
     fetchRegistry: true
