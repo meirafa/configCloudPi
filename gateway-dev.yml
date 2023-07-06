@@ -1,12 +1,15 @@
 server:
   port: ${PORT:8080}
+  servlet:
+    context-path: /gateway/
 
 spring:
-  config:
-    import: configserver:http://localhost:8888/
   application:
     name: gateway
-
+  config:
+    activate:
+      on-profile: "dev"
+    import: configserver:http://localhost:8888/
   cloud:
     gateway:
       discovery:
