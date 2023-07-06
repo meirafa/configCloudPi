@@ -6,8 +6,6 @@ server:
 spring:
   application:
     name: config-server
-  config:
-    import: "classpath:application.yml"
 
   cloud:
     config:
