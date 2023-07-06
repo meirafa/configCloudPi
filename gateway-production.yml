@@ -8,10 +8,8 @@ spring:
     name: gateway
 
   config:
-    activate:
-      on-profile: "production"
-    import: "optional:configserver:http://localhost:8888/,classpath:application-production.yml"
-
+    import: optional:configserver:http://localhost:8888/
+    
   cloud:
     gateway:
       discovery:
