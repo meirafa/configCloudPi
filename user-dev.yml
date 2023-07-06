@@ -1,13 +1,15 @@
 server:
-  port: ${PORT:8086}
+  port: 8086
   servlet:
     context-path: /user/
+
 spring:
-  config:
-    import: optional:configserver:http://config:8888/
   application:
     name: user
-
+  config:
+    import: optional:configserver:http://config:8888/
+    activate:
+      on-profile: "dev"
 
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
@@ -20,10 +22,6 @@ spring:
     url: jdbc:mysql://root@localhost:3306/pi_final_g2
     username: dh
     password: 123
-    #url: jdbc:mysql://${DB_HOST_AWS}:${DB_PORT}/${DB_DATABASE}
-    #username: ${DB_USER_AWS}
-    #password: ${DB_PASSWORD_AWS}
-
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true
@@ -32,3 +30,12 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+eureka:
+  instance:
+    instance-id: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
