@@ -1,7 +1,5 @@
 server:
   port: 8086
-  servlet:
-    context-path: /user/
 
 spring:
   application:
@@ -24,8 +22,6 @@ spring:
         format_sql: true
 
 eureka:
-  instance:
-    instance-id: localhost
   client:
     registerWithEureka: true
     fetchRegistry: true
