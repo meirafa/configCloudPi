@@ -1,11 +1,9 @@
 server:
   port: 8888
-  servlet:
-    context-path: /config/
 
 spring:
   application:
-    name: config-server
+    name: config
 
   cloud:
     config:
